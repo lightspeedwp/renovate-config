@@ -31,8 +31,7 @@ rule in its `renovate.json`:
 
 | Update | Behaviour |
 | --- | --- |
-| Minor, patch, pin, digest | Automerged once all status checks pass |
-| Major, or a minor or patch update below 1.0.0 | Pull request for review |
+| Every update, majors included | Merged by Renovate once all status checks pass |
 | `lightspeed-hosting-infra` | Never automerged; merged through its own review gate |
 
 Repositories without a `renovate.json` are processed without an onboarding PR
@@ -41,6 +40,9 @@ Repositories without a `renovate.json` are processed without an onboarding PR
 ## Requirements per repository
 
 - The Mend Renovate app must be installed on the repository.
+- `platformAutomerge` is off: Renovate merges a PR itself, on a later run, once every status check
+  is green. GitHub's native auto-merge is not used, because on a repository without required checks
+  it merges the moment the PR opens, before CI has run.
 - Branch protection with required status checks. Renovate automerges only when checks pass, so a
   repository with no checks gets no protection from a broken update.
 - If branch protection requires an approving review, install the

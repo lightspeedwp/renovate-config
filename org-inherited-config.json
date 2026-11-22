@@ -8,18 +8,9 @@
   "onboarding": false,
   "requireConfig": "optional",
   "labels": ["dependencies"],
+  "automerge": true,
+  "platformAutomerge": false,
   "packageRules": [
-    {
-      "description": "Automerge minor, patch, pin and digest updates once all status checks pass.",
-      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
-      "automerge": true
-    },
-    {
-      "description": "Below 1.0.0 a minor or patch update can break, so hold it for review.",
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchCurrentVersion": "/^v?0(\\.|$)/",
-      "automerge": false
-    },
     {
       "description": "lightspeed-hosting-infra merges only through its own review gate, so Renovate never automerges there.",
       "matchRepositories": ["lightspeedwp/lightspeed-hosting-infra"],

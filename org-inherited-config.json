@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "Inherited by every lightspeedwp repository the Mend Renovate app is installed on.",
+    "A repository's own renovate.json is applied on top of this file and can override it."
+  ],
+  "extends": ["config:best-practices"],
+  "onboarding": false,
+  "requireConfig": "optional",
+  "timezone": "Africa/Johannesburg",
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "Automerge minor, patch, pin and digest updates once all status checks pass.",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchCurrentVersion": "!/^v?0\\./",
+      "automerge": true
+    },
+    {
+      "description": "Major updates and 0.x versions open a PR for review instead of automerging.",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "lightspeed-hosting-infra merges only through scripts/ci/merge-pr.sh after a CodeRabbit review, so Renovate never automerges there.",
+      "matchRepositories": ["lightspeedwp/lightspeed-hosting-infra"],
+      "automerge": false
+    }
+  ]
+}

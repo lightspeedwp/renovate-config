@@ -7,22 +7,21 @@
   "extends": ["config:best-practices"],
   "onboarding": false,
   "requireConfig": "optional",
-  "timezone": "Africa/Johannesburg",
   "labels": ["dependencies"],
   "packageRules": [
     {
       "description": "Automerge minor, patch, pin and digest updates once all status checks pass.",
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "matchCurrentVersion": "!/^v?0\\./",
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
       "automerge": true
     },
     {
-      "description": "Major updates and 0.x versions open a PR for review instead of automerging.",
-      "matchUpdateTypes": ["major"],
+      "description": "Below 1.0.0 a minor or patch update can break, so hold it for review.",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "<1.0.0",
       "automerge": false
     },
     {
-      "description": "lightspeed-hosting-infra merges only through scripts/ci/merge-pr.sh after a CodeRabbit review, so Renovate never automerges there.",
+      "description": "lightspeed-hosting-infra merges only through its own review gate, so Renovate never automerges there.",
       "matchRepositories": ["lightspeedwp/lightspeed-hosting-infra"],
       "automerge": false
     }

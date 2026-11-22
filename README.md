@@ -16,8 +16,8 @@ Merge order, lowest to highest: Mend global config, then this file, then a repos
 
 | Update | Behaviour |
 | --- | --- |
-| Minor, patch, pin, digest (version 1.0 or later) | Automerged once all status checks pass |
-| Major, or any update to a 0.x version | Pull request for review |
+| Minor, patch, pin, digest | Automerged once all status checks pass |
+| Major, or a minor or patch update below 1.0.0 | Pull request for review |
 | `lightspeed-hosting-infra` | Never automerged; merged through its own review gate |
 
 Repositories without a `renovate.json` are processed without an onboarding PR
@@ -35,12 +35,8 @@ Repositories without a `renovate.json` are processed without an onboarding PR
 
 ## Validate a change
 
-Validate it as repository config from a scratch directory:
-
 ```sh
-cp org-inherited-config.json "$SCRATCH/renovate.json" && cd "$SCRATCH"
-npx --yes --package renovate -- renovate-config-validator --strict
+npx --yes --package renovate -- renovate-config-validator --strict org-inherited-config.json
 ```
 
-Expect exactly two errors, for `onboarding` and `requireConfig`. Both are global options that a
-repository file may not set, but inherited config may. Any other error is real.
+The `validate` workflow runs the same check on every pull request.

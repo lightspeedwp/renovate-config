@@ -4,32 +4,16 @@
     "Inherited by every lightspeedwp repository the Mend Renovate app is installed on.",
     "A repository's own renovate.json is applied on top of this file and can override it."
   ],
-  "extends": [
-    "config:best-practices"
-  ],
+  "extends": ["config:best-practices"],
   "onboarding": false,
   "requireConfig": "optional",
-  "labels": [
-    "dependencies"
-  ],
+  "labels": ["dependencies"],
+  "automerge": true,
+  "platformAutomerge": false,
   "packageRules": [
     {
-      "description": "Automerge every update, majors included, once all status checks pass.",
-      "matchUpdateTypes": [
-        "major",
-        "minor",
-        "patch",
-        "pin",
-        "pinDigest",
-        "digest"
-      ],
-      "automerge": true
-    },
-    {
       "description": "lightspeed-hosting-infra merges only through its own review gate, so Renovate never automerges there.",
-      "matchRepositories": [
-        "lightspeedwp/lightspeed-hosting-infra"
-      ],
+      "matchRepositories": ["lightspeedwp/lightspeed-hosting-infra"],
       "automerge": false
     }
   ]

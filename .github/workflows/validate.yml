@@ -18,6 +18,6 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24
+          node-version: 26
       - name: Validate org-inherited-config.json
         run: npx --yes --package renovate@44.257.9 -- renovate-config-validator --strict org-inherited-config.json

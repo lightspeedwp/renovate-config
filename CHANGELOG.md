@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Automerge every update type, majors and 0.x versions included, once status checks pass.
+  `lightspeed-hosting-infra` stays excluded.
 - Match 0.x versions independently of the package versioning scheme and clarify how repositories
   can override inherited automerge package rules.
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Match 0.x versions independently of the package versioning scheme and clarify how repositories
+  can override inherited automerge package rules.
+
 ### Added
 
 - Organisation-wide inherited Renovate config: no onboarding PR, config file optional, automerge

@@ -17,7 +17,7 @@
     {
       "description": "Below 1.0.0 a minor or patch update can break, so hold it for review.",
       "matchUpdateTypes": ["minor", "patch"],
-      "matchCurrentVersion": "<1.0.0",
+      "matchCurrentVersion": "/^v?0(\\.|$)/",
       "automerge": false
     },
     {

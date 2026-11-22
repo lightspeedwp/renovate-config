@@ -10,7 +10,22 @@ from `org-inherited-config.json` in this repository to every repository the app 
 Mend switches inheritance on for the organisation only after it sees a commit to that file.
 
 Merge order, lowest to highest: Mend global config, then this file, then a repository's own
-`renovate.json`. A repository's own config overrides anything set here.
+`renovate.json`. Repository-level settings do not remove inherited package rules: those rules can
+still match updates and override scalar settings such as `automerge`.
+
+To disable automerge while keeping update PRs enabled, a repository can add a later matching package
+rule in its `renovate.json`:
+
+```json
+{
+  "packageRules": [
+    {
+      "matchPackageNames": ["*"],
+      "automerge": false
+    }
+  ]
+}
+```
 
 ## Policy
 

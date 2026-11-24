@@ -8,6 +8,18 @@
   "onboarding": false,
   "requireConfig": "optional",
   "labels": ["dependencies"],
-  "automerge": true,
-  "platformAutomerge": false
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "description": "Minor and patch updates automerge once checks pass; 0.x releases and majors stay for a human.",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+    {
+      "description": "Digest, pin and lock-file maintenance updates keep the same version, so they automerge once checks pass.",
+      "matchUpdateTypes": ["digest", "pin", "pinDigest", "lockFileMaintenance"],
+      "automerge": true
+    }
+  ]
 }

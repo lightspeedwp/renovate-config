@@ -14,8 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ignore `**/archived/**` paths so archived workflows are not re-pinned.
 - Disable updates to the Keep UI/API digests in `lightspeed-hosting-infra`: they are release-coupled and checked against `keep/versions.env`.
 
-### Changed
-
 - Semantic commit titles (`chore(deps):`), weekly schedule (before 07:00 Monday, Africa/Johannesburg), 3-day `minimumReleaseAge`, `prConcurrentLimit` 5, and one grouped pull request for non-major GitHub Actions updates.
 
 ### Changed

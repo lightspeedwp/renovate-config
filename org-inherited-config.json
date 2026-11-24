@@ -9,12 +9,5 @@
   "requireConfig": "optional",
   "labels": ["dependencies"],
   "automerge": true,
-  "platformAutomerge": false,
-  "packageRules": [
-    {
-      "description": "lightspeed-hosting-infra merges only through its own review gate, so Renovate never automerges there.",
-      "matchRepositories": ["lightspeedwp/lightspeed-hosting-infra"],
-      "automerge": false
-    }
-  ]
+  "platformAutomerge": false
 }

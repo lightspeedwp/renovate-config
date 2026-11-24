@@ -32,7 +32,6 @@ rule in its `renovate.json`:
 | Update | Behaviour |
 | --- | --- |
 | Every update, majors included | Merged by Renovate once all status checks pass |
-| `lightspeed-hosting-infra` | Never automerged; merged through its own review gate |
 
 Repositories without a `renovate.json` are processed without an onboarding PR
 (`onboarding: false`, `requireConfig: "optional"`).

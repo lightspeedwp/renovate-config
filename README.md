@@ -31,7 +31,9 @@ rule in its `renovate.json`:
 
 | Update | Behaviour |
 | --- | --- |
-| Every update, majors included | Merged by Renovate once all status checks pass |
+| Minor and patch (not 0.x) | Merged by Renovate once all status checks pass |
+| Digest, pin and lock-file maintenance | Merged by Renovate once all status checks pass |
+| Major updates and 0.x versions | Left open for a human to review and merge |
 
 Repositories without a `renovate.json` are processed without an onboarding PR
 (`onboarding: false`, `requireConfig: "optional"`).

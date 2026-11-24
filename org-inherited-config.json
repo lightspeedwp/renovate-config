@@ -13,7 +13,7 @@
     {
       "description": "Minor and patch updates automerge once checks pass; 0.x releases and majors stay for a human.",
       "matchUpdateTypes": ["minor", "patch"],
-      "matchCurrentVersion": "!/^0/",
+      "matchCurrentVersion": "!/^v?0(\\.|$)/",
       "automerge": true
     },
     {

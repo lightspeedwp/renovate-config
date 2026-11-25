@@ -11,8 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Keep the default `renovate/` branch prefix. The `deps/` prefix made `.github`'s `Validate branch name` check fail (it exempts only `renovate/` and `dependabot/`, and rejects dots such as `7.x`). `prHeader` already satisfies the PR template check.
 
-### Fixed
-
 - Renovate pull requests now pass each repository's gates: labelled `meta:no-changelog` (the changelog gate in `.github` and `tas-plugin`), branches use the `deps/` prefix so `.github`'s router picks `pr_dep_update`, and `prHeader` supplies that template's non-empty sections.
 - Stop pinning npm devDependencies (`:pinDevDependencies` ignored): exact pins conflicted with `overrides` in `.github` (`EOVERRIDE`, failing every `npm ci`). Action and Docker digest pins stay.
 - Ignore `**/archived/**` paths so archived workflows are not re-pinned.

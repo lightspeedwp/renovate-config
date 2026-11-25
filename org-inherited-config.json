@@ -93,5 +93,6 @@
       "groupName": "github-actions",
       "matchCurrentVersion": "!/^v?0(\\.|$)/"
     }
-  ]
+  ],
+  "branchPrefixOld": "deps/"
 }

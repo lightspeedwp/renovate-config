@@ -3,7 +3,7 @@
   "description": [
     "Inherited by every lightspeedwp repository the Mend Renovate app is installed on.",
     "A repository's own renovate.json is applied on top of this file and can override it.",
-    "Policy that repository CI gates depend on: labels (meta:no-changelog), branchPrefix (deps/) and prHeader. A repository renovate.json that sets labels replaces this array, so keep meta:no-changelog in it."
+    "Policy that repository CI gates depend on: labels (meta:no-changelog) and prHeader. A repository renovate.json that sets labels replaces this array, so keep meta:no-changelog in it."
   ],
   "extends": [
     "config:best-practices",
@@ -20,8 +20,6 @@
   ],
   "minimumReleaseAge": "3 days",
   "prConcurrentLimit": 5,
-  "branchPrefix": "deps/",
-  "branchPrefixOld": "renovate/",
   "ignorePaths": [
     "**/node_modules/**",
     "**/bower_components/**",
@@ -95,5 +93,6 @@
       "groupName": "github-actions",
       "matchCurrentVersion": "!/^v?0(\\.|$)/"
     }
-  ]
+  ],
+  "branchPrefixOld": "deps/"
 }

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Renovate pull requests now pass each repository's gates: labelled `meta:no-changelog` (the changelog gate in `.github` and `tas-plugin`), branches use the `deps/` prefix so `.github`'s router picks `pr_dep_update`, and `prHeader` supplies that template's non-empty sections.
+- Stop pinning npm devDependencies (`:pinDevDependencies` ignored): exact pins conflicted with `overrides` in `.github` (`EOVERRIDE`, failing every `npm ci`). Action and Docker digest pins stay.
+- Ignore `**/archived/**` paths so archived workflows are not re-pinned.
+- Disable updates to the Keep UI/API digests in `lightspeed-hosting-infra`: they are release-coupled and checked against `keep/versions.env`.
+- Allow GHCR and Google Artifact Registry image updates without release timestamps while keeping the three-day cooldown for releases with timestamps.
+
+- Semantic commit titles (`chore(deps):`), weekly schedule (before 07:00 Monday, Africa/Johannesburg), 3-day `minimumReleaseAge`, `prConcurrentLimit` 5, and one grouped pull request for non-major GitHub Actions updates.
+
 ### Changed
 
 - Automerge only non-major updates: minor and patch (not 0.x) plus digest, pin and lock-file

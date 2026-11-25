@@ -2,24 +2,98 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
     "Inherited by every lightspeedwp repository the Mend Renovate app is installed on.",
-    "A repository's own renovate.json is applied on top of this file and can override it."
+    "A repository's own renovate.json is applied on top of this file and can override it.",
+    "Policy that repository CI gates depend on: labels (meta:no-changelog), branchPrefix (deps/) and prHeader. A repository renovate.json that sets labels replaces this array, so keep meta:no-changelog in it."
   ],
-  "extends": ["config:best-practices"],
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits"
+  ],
+  "ignorePresets": [
+    ":pinDevDependencies"
+  ],
   "onboarding": false,
   "requireConfig": "optional",
-  "labels": ["dependencies"],
+  "timezone": "Africa/Johannesburg",
+  "schedule": [
+    "before 7am on monday"
+  ],
+  "minimumReleaseAge": "3 days",
+  "prConcurrentLimit": 5,
+  "branchPrefix": "deps/",
+  "branchPrefixOld": "renovate/",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/__tests__/**",
+    "**/test/**",
+    "**/tests/**",
+    "**/__fixtures__/**",
+    "**/archived/**"
+  ],
+  "labels": [
+    "dependencies",
+    "meta:no-changelog"
+  ],
+  "prHeader": "## Linked issues\n\nN/A. Automated dependency update opened by Renovate.\n\n## Maintenance summary\n\nAutomated update of the dependency or dependencies listed below.\n\n## Impact assessment\n\nPatch, minor, digest and pin updates merge automatically once the required checks pass. Major and 0.x updates stay open for a human to review.\n\n## Test scope\n\nCovered by this repository's CI checks on this pull request.\n\n## Changelog\n\nNo changelog entry needed: automated dependency update, labelled `meta:no-changelog`.\n\n",
   "platformAutomerge": false,
   "packageRules": [
     {
+      "description": "Allow GHCR and Google Artifact Registry image updates without release timestamps; keep the cooldown when a timestamp is available.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/**",
+        "*-docker.pkg.dev/**"
+      ],
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
+    },
+    {
       "description": "Minor and patch updates automerge once checks pass; 0.x releases and majors stay for a human.",
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "matchCurrentVersion": "!/^v?0(\\.|$)/",
       "automerge": true
     },
     {
       "description": "Digest, pin and lock-file maintenance updates keep the same version, so they automerge once checks pass.",
-      "matchUpdateTypes": ["digest", "pin", "pinDigest", "lockFileMaintenance"],
+      "matchUpdateTypes": [
+        "digest",
+        "pin",
+        "pinDigest",
+        "lockFileMaintenance"
+      ],
       "automerge": true
+    },
+    {
+      "description": "Keep UI and API images are digest-pinned to one release recorded in keep/versions.env (KEEP_RELEASE) and checked by tests/test-keep-compose-contract.sh. A lone digest bump breaks that pairing, so they are updated by hand at deploy time.",
+      "matchRepositories": [
+        "lightspeedwp/lightspeed-hosting-infra"
+      ],
+      "matchPackageNames": [
+        "us-central1-docker.pkg.dev/keephq/keep/**"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "One pull request for all non-major GitHub Actions updates.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pin",
+        "pinDigest"
+      ],
+      "groupName": "github-actions",
+      "matchCurrentVersion": "!/^v?0(\\.|$)/"
     }
   ]
 }

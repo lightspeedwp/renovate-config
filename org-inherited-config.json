@@ -41,6 +41,17 @@
   "platformAutomerge": false,
   "packageRules": [
     {
+      "description": "Allow GHCR and Google Artifact Registry image updates without release timestamps; keep the cooldown when a timestamp is available.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/**",
+        "*-docker.pkg.dev/**"
+      ],
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
+    },
+    {
       "description": "Minor and patch updates automerge once checks pass; 0.x releases and majors stay for a human.",
       "matchUpdateTypes": [
         "minor",

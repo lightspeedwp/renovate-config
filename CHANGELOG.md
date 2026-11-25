@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Stop pinning npm devDependencies (`:pinDevDependencies` ignored): exact pins conflicted with `overrides` in `.github` (`EOVERRIDE`, failing every `npm ci`). Action and Docker digest pins stay.
 - Ignore `**/archived/**` paths so archived workflows are not re-pinned.
 - Disable updates to the Keep UI/API digests in `lightspeed-hosting-infra`: they are release-coupled and checked against `keep/versions.env`.
+- Allow GHCR and Google Artifact Registry image updates without release timestamps while keeping the three-day cooldown for releases with timestamps.
 
 - Semantic commit titles (`chore(deps):`), weekly schedule (before 07:00 Monday, Africa/Johannesburg), 3-day `minimumReleaseAge`, `prConcurrentLimit` 5, and one grouped pull request for non-major GitHub Actions updates.
 

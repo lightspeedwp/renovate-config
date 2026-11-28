@@ -51,6 +51,13 @@ Repositories without a `renovate.json` are processed without an onboarding PR
   Renovate cannot automerge.
 - A `renovate.json` only where a repository needs different behaviour.
 
+Renovate checks repositories daily before 04:00 in the configured timezone. The four-hour window
+matches the Mend Community job queue's roughly four-hour polling interval, so an update whose
+three-day cooldown has elapsed is re-evaluated promptly and can automerge instead of waiting for
+the next Monday. `internalChecksFilter: "strict"` keeps updates with a pending
+`renovate/stability-days` check out of branches entirely; the only exception is Docker digest
+updates for unversioned tags, which have no release timestamp to age against.
+
 ## Validate a change
 
 ```sh

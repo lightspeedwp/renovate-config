@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Renovate now checks repositories daily (`* 0-3 * * *`, four-hour window) instead of only before 07:00 Monday. A weekly window left digest updates with an elapsed three-day cooldown still showing a pending `renovate/stability-days` check until the next Monday, which blocked automerge. Mend's Community job queue checks active repositories roughly every four hours, so the window must be at least that wide.
+- Set `internalChecksFilter: "strict"` explicitly so Renovate does not create a branch or PR while its minimum-release-age check is pending. Updates with no release timestamp are held instead of being raised with a check that can never flip.
+- Allow Docker digest and pinDigest updates without a release timestamp. Unversioned image tags such as `postgres` have no version timestamp to age against; with the default `timestamp-required` they stayed pending indefinitely. Versioned tags still use the three-day cooldown when the registry provides a timestamp.
+
 - Keep the default `renovate/` branch prefix. The `deps/` prefix made `.github`'s `Validate branch name` check fail (it exempts only `renovate/` and `dependabot/`, and rejects dots such as `7.x`). `prHeader` already satisfies the PR template check.
 
 - Renovate pull requests get `meta:no-changelog` by default. Repositories that override `labels` must retain `meta:no-changelog` for Renovate pull requests to pass the changelog gate in `.github` and `tas-plugin`. The inherited `prHeader` supplies the PR template's non-empty sections.
